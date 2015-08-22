@@ -9,7 +9,7 @@ module Trees {
 		smallest(): T
 		largest(): T
 	}
-	
+
 	export function newSet() {
 		return new EmptyTreeSet()
 	}
@@ -19,7 +19,7 @@ module Trees {
 
 		contains = (el: T) => false
 
-		insert(el: T) {
+		insert(el: T): SortedSet<T> {
 			return new NonEmptyTreeSet(el, this, this)
 		}
 
@@ -27,12 +27,12 @@ module Trees {
 			return this;
 		}
 
-		smallest() {
+		smallest(): T {
 			throw "No such element exception"
 			return null;
 		}
 
-		largest() {
+		largest(): T {
 			throw "No such element exception"
 			return null;
 		}

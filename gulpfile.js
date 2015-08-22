@@ -18,7 +18,7 @@ gulp.task('build', function () {
 
 // Compile the tests to javascript
 gulp.task('build-test', ['build'], function () {
-  var tsTests = gulp.src('test/**/*.ts')
+  var tsTests = gulp.src(['src/**/*.ts', 'test/**/*.ts'])
     .pipe(tsc({
       noImplicitAny: true,
       module: 'commonjs'

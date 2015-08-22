@@ -10,7 +10,6 @@ gulp.task('build', function () {
   var tsMain = gulp.src('src/**/*.ts')
     .pipe(ts({
       noImplicitAny: true,
-      out: 'output.js',
       module: 'commonjs'
     }));
   return tsMain.js.pipe(gulp.dest('built/local'));
@@ -21,15 +20,14 @@ gulp.task('build-test', ['build'], function () {
   var tsTests = gulp.src('test/**/*.ts')
     .pipe(ts({
       noImplicitAny: true,
-      out: 'output.js',
       module: 'commonjs'
     }));
-  return tsTests.js.pipe(gulp.dest('built/test').pipe(gulp.dest('test')));
+  return tsTests.js.pipe(gulp.dest('built/test'));
 });
 
 // Run the tests 
 gulp.task('test', ['build-test'], function () {
-  return gulp.src('built/test/output.js', { read: false })
+  return gulp.src('built/test/**/*.js', { read: false })
     .pipe(mocha({ reporter: 'list' }))
     .on('error', gutil.log);
 });

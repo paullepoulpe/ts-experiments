@@ -1,14 +1,15 @@
 var gulp = require('gulp');
 var mocha = require('gulp-mocha');
 var gutil = require('gulp-util');
-var ts = require('gulp-typescript');
+var tsc = require('gulp-typescript');
+var del = require('del');
 
 gulp.task('default', ['build', 'build-test'], function () { });
 
 // Compile the sources to javascript
 gulp.task('build', function () {
   var tsMain = gulp.src('src/**/*.ts')
-    .pipe(ts({
+    .pipe(tsc({
       noImplicitAny: true,
       module: 'commonjs'
     }));
@@ -18,7 +19,7 @@ gulp.task('build', function () {
 // Compile the tests to javascript
 gulp.task('build-test', ['build'], function () {
   var tsTests = gulp.src('test/**/*.ts')
-    .pipe(ts({
+    .pipe(tsc({
       noImplicitAny: true,
       module: 'commonjs'
     }));
@@ -41,3 +42,9 @@ gulp.task('watch', function () {
 gulp.task('watch-test', function () {
   gulp.watch(['src/**', 'test/**'], ['test']);
 });
+
+// Remove build files
+gulp.task('clean', function () {
+    del('built');
+});
+

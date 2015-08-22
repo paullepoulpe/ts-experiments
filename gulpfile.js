@@ -8,7 +8,7 @@ gulp.task('default', ['build', 'build-test'], function () { });
 
 // Compile the sources to javascript
 gulp.task('build', function () {
-  var tsMain = gulp.src('src/**/*.ts')
+  var tsMain = gulp.src('src/main/**/*.ts')
     .pipe(tsc({
       noImplicitAny: true,
       module: 'commonjs'
@@ -18,7 +18,7 @@ gulp.task('build', function () {
 
 // Compile the tests to javascript
 gulp.task('build-test', ['build'], function () {
-  var tsTests = gulp.src(['src/**/*.ts', 'test/**/*.ts'])
+  var tsTests = gulp.src('src/test/**/*.ts')
     .pipe(tsc({
       noImplicitAny: true,
       module: 'commonjs'
@@ -35,12 +35,7 @@ gulp.task('test', ['build-test'], function () {
 
 // Run the build on changes
 gulp.task('watch', function () {
-  gulp.watch(['src/**', 'test/**'], ['build', 'build-test']);
-});
-
-// Run the tests on changes
-gulp.task('watch-test', function () {
-  gulp.watch(['src/**', 'test/**'], ['test']);
+  gulp.watch('src/**', ['test']);
 });
 
 // Remove build files
